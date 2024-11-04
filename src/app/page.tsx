@@ -8,8 +8,9 @@ import TrackInfo from '@/app/components/trackInfo';
 
 
 const api = SpotifyApi.withClientCredentials(
-    '36314e321f1243b58a97639120f5153b',
-    '3ba6ebf8222748288fd546c150fbfe32'
+    // @ts-ignore
+    process.env.CLIENT_ID,
+    process.env.CLIENT_SECRET
 );
 
 
