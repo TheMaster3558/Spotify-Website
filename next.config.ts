@@ -1,7 +1,22 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    output: "export",
+    images: {
+        domains: ["i.scdn.co", "th.bing.com"],
+        remotePatterns: [
+            {
+                protocol: "http",
+                hostname: "i.scdn.co",
+                pathname: "**"
+            },
+            {
+                protocol: "https",
+                hostname: "th.bing.com",
+                pathname: "**",
+            }
+        ]
+    }
 };
 
 export default nextConfig;
