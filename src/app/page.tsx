@@ -9,6 +9,7 @@ import TrackInfo from '@/app/components/trackInfo';
 
 const api = SpotifyApi.withClientCredentials(
     // @ts-expect-error
+    // There shouldn't be an error
     process.env.CLIENT_ID,
     process.env.CLIENT_SECRET
 );
