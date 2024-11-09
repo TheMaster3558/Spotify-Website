@@ -1,34 +1,5 @@
 import Image from 'next/image';
 
-const TIME_STEPS = [3600000, 60000, 1000];
-
-
-const minTwoDigits = (num: number) => {
-    if (num / 10 < 1) {
-        return `0${num}`;
-    }
-    return num.toString();
-}
-
-
-const durationMsToString = (duration: number) => {
-    let result = "";
-    for (const step of TIME_STEPS) {
-        const num = Math.floor(duration / step);
-        if (num > 0) {
-            if (result.length != 0) {
-                result += `${minTwoDigits(num)}:`
-            }
-            else {
-                result += `${num}:`
-            }
-
-            duration -= num * step;
-        }
-    }
-    return result.substring(0, result.length - 1);
-}
-
 
 export default function TrackInfo(
     { name, artist, imageUrl, duration, imageSize, onClick, explicit }:
@@ -68,3 +39,34 @@ export default function TrackInfo(
         </div>
     );
 }
+
+
+const TIME_STEPS = [3600000, 60000, 1000];
+
+
+const minTwoDigits = (num: number) => {
+    if (num / 10 < 1) {
+        return `0${num}`;
+    }
+    return num.toString();
+}
+
+
+const durationMsToString = (duration: number) => {
+    let result = "";
+    for (const step of TIME_STEPS) {
+        const num = Math.floor(duration / step);
+        if (num > 0) {
+            if (result.length != 0) {
+                result += `${minTwoDigits(num)}:`
+            }
+            else {
+                result += `${num}:`
+            }
+
+            duration -= num * step;
+        }
+    }
+    return result.substring(0, result.length - 1);
+}
+

@@ -2,23 +2,10 @@
 
 import {useRouter} from 'next/navigation';
 import Input from "@/app/components/input";
-import {SpotifyApi, Track} from '@spotify/web-api-ts-sdk';
 import {useEffect, useState} from "react";
 import TrackInfo from '@/app/components/trackInfo';
-
-
-const api = SpotifyApi.withClientCredentials(
-    // @ts-expect-error
-    // There shouldn't be an error
-    process.env.NEXT_PUBLIC_CLIENT_ID,
-    process.env.NEXT_PUBLIC_CLIENT_SECRET
-);
-
-
-const getClosestMatches = async (query: string): Promise<Track[]> => {
-    const items = await api.search(query, ['track']);
-    return items.tracks.items.slice(0, 5);
-}
+import type {Track} from "@spotify/web-api-ts-sdk";
+import api from "@/app/spotifyInstance"
 
 
 export default function Home() {
@@ -70,4 +57,10 @@ export default function Home() {
             </div>
         </div>
     );
+}
+
+
+const getClosestMatches = async (query: string): Promise<Track[]> => {
+    const items = await api.search(query, ['track']);
+    return items.tracks.items.slice(0, 5);
 }
