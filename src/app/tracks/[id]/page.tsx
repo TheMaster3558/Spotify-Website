@@ -1,5 +1,6 @@
 import api from "@/app/spotifyInstance";
 import Scale from "@/app/components/scale";
+import Image from "next/image";
 
 
 export default async function Track({
@@ -8,10 +9,33 @@ export default async function Track({
     params: Promise<{ id: number }>
 }) {
     const id = (await params).id;
-    const track = await api.tracks.audioFeatures(id.toString());
+    const track = await api.tracks.get(id.toString());
+    const audioFeatures = await api.tracks.audioFeatures(id.toString());
+
+    const scales = [
+        ["Acousticness", audioFeatures.acousticness, 0.0, 1.0],
+        ["Danceability", audioFeatures.danceability, 0.0, 1.0],
+        ["Energy", audioFeatures.energy, 0.0, 1.0],
+        ["Instrumentalness", audioFeatures.instrumentalness, 0.0, 1.0],
+        ["Liveness", audioFeatures.liveness, 0.0, 1.0],
+        ["Loudness", audioFeatures.loudness, -60.0, 0.0],
+        ["Speechiness", audioFeatures.speechiness, 0.0, 1.0],
+        ["Valence", audioFeatures.valence, 0.0, 1.0]
+    ];
 
     return (
-        <Scale name="Danceability" value={track.danceability} bottomRange={0} topRange={1} units=""/>
+        <div className="flex justify-center">
+            <div className="flex items-center gap-12 py-7">
+                <Image
+                    className="rounded-lg"
+                    src={track.album.images[0].url}
+                    alt="cover"
+                    width={250}
+                    height={250}
+                />
+                <h1 className="font-bold text-5xl">{track.name}</h1>
+            </div>
+        </div>
     );
 }
 

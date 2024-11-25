@@ -6,8 +6,12 @@ export default function Scale(
     console.log(bottomRange);
     console.log(topRange);
     return (
-        <div>
-            <input type="range" value={value} min={bottomRange} max={topRange} readOnly={true} step="0.01"/>
+        <div className="flex flex-col items-center">
+            <h1 className="font-bold">{name}</h1>
+            <input
+                className="range pr-6 accent-green-500"
+                type="range" value={value} min={bottomRange} max={topRange} readOnly={true} step="0.01"
+            />
         </div>
     )
 }
